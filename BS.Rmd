@@ -1,0 +1,212 @@
+---
+title: "Basic Skills"
+output: 
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: fill
+    theme: sandstone
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(tidyverse)
+```
+
+Something
+===============================================================
+Column {.tabset data-width=400}
+--------------------------------------------------------------
+### Udo
+![Udo Boemboem](Udo.jpg)
+
+### Tupac Sharon
+![Tupac Sharon](TupacSharon.png)
+
+Column {data-width=100}
+---------------------------------------------------------------
+### TF even is this
+
+This is my terrible summary of the basic skills course which I will probably never finish
+
+Algebra {.storyboard data-navmenu="Mathematics"}
+===============================================================
+### Real Numbers
+
+$$\text{set of positive integers}  = \{1,2,3,...\}$$
+$$\text{set of integers} = \{...,-3,-2,-1,0,1,2,3,...\}$$
+$$\text{set of rational numbers} = \{...,-2,...,-\frac{3}{2},...,0,\frac{1}{4},...,\frac{2}{1}...\}$$
+(terminating or nonterminating repeating decimals)
+$$\text{set of irrational numbers} = \{...,0,...,\sqrt{2},...,e,...,\pi,...,\}$$
+
+### Properties of real numbers
+
+|    |Property      |Example                   |
+|:---|:------------:|:------------------------:|
+|1   |$a-b=a+(-b)$  |$3-8=3+(-8)=-5$           |
+|2   |$a-(-b)=a+b$  |$4-(-3)=4+3=7$            |
+|3   |$-a=(-1)(a)$  |$-30=(-1)(30)$            |
+|4   |$a(b+c)=ab+ac$|$3(2+6)=3\times2+3\times6$|
+|5   |$a(b-c)=ab-ac$|$3(2-6)=3\times2-3\times6$|  
+|... |...           |   ...                    |
+|18  |$a(\frac{b}{a}=b)$|$7(\frac{3}{7}) = 3$  |
+|...|...|...|
+|20 |$\frac{a}{b}\times\frac{c}{d} = \frac{ac}{bd}$|$\frac{3}{2}\times\frac{5}{9} = \frac{3\times5}{2\times9}$|
+|...|...|...|
+|27 |$\frac{a}{b}+\frac{c}{d} = \frac{ad+bc}{bd}$|$\frac{3}{2}\times\frac{5}{9} = \frac{3\times5}{2\times9}$|
+|...|...|...|
+|29 |$\frac{\frac{a}{b}}{\frac{c}{d}}=\frac{a}{b}\div\frac{c}{d} = \frac{a}{b}\times\frac{d}{c}$|$\frac{\frac{2}{3}}{\frac{7}{5}}=\frac{2}{3}\div\frac{7}{5} = \frac{2}{3}\times\frac{5}{7}$|
+|...|...|...|
+
+***
+
+The list is way too long, lol
+
+### Exponents and Radicals
+
+$$x^n = x\times x \times x \times ... \times x$$
+for n factors
+
+$$x^{-n} = \frac{1}{x^n}$$
+
+$$\frac{1}{x^{-n}} = x^{n}$$
+$$x^0 = 1 \text{    if    } x\neq 0$$
+
+$$x^{k/n} = (\sqrt[n]{x})^{k}$$
+
+
+Functions and their graphs {.storyboard data-navmenu="Mathematics"}
+===============================================================
+
+### What is a function?
+
+![Domain vs Range](domainrange.png)
+
+***
+
+
+"A *function* is a rule that assigns to each input number exactly one output number. The set of all input numbers to which the rule applies is called the *domain* of the function. The set of all output numbers is called the *range*"
+
+### Linear Functions
+
+```{r}
+ggplot(data.frame(x = c(0,7)), aes(x)) + 
+  stat_function(fun = function(x)1.5*x+2) +
+  xlab("x") +
+  ylab("f(x)")
+```
+
+***
+
+$$f(x) = ax+b$$
+
+For example:
+
+$$f(x) = 1.5x+2$$
+a is the slope, b is the intercept
+
+### Quadratic functions
+
+```{r}
+ggplot(data.frame(x = c(-30,30)), aes(x)) + 
+  stat_function(fun = function(x)1.5*x^2 + 2 * x, color = "red", show.legend = TRUE) +
+  stat_function(fun = function(x)-2*x^2 + x + 1,color = "blue", show.legend = TRUE) +
+  xlab("x") +
+  ylab("f(x)") +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0)
+```
+***
+
+**Standard function:**
+$$f(x) = ax^2 +bx+c$$
+
+for example:
+
+\begin{align*}
+f(x) = 1.5x^2 + 2x \\
+g(x) = -2x^2 + x + 1 
+\end{align*}
+
+$$\text{vertex} = -\frac{b}{2a}$$
+$$\text{y-intercept} = c$$
+
+### abc-formula
+
+$$\begin {align*}
+ax^2 + bx + c = 0 \\
+4a^2x^2 + 4abx + 4ac = 0 \\ 
+4a^2x^2 + 4abx = -4ac \\
+4a^2x^2 +4abx + b^2 = b^2 - 4ac \\
+(2ax + b)^2 = b^2 - 4ac \\
+2ax + b = \pm \sqrt{b^2 - 4ac} \\
+2ax = -b \pm \sqrt{b^2 - 4ac} \\
+x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \\
+\end {align*}$$
+
+### Polynomials
+
+$$f(x) = c_{n}x^{n}+c_{n-1}x^{n-1}+...+c_1x+c_0$$
+
+$$f(x) = 9x^5 + 2x^2 + 19$$
+
+```{r}
+ggplot(data.frame(x = c(-30,30)), aes(x)) + 
+  stat_function(fun = function(x)9 * x^5 + 2 * x^2 + 19) +
+  xlab("x") +
+  ylab("f(x)") +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0)
+```
+
+***
+
+This is a 5th degree polynomial
+
+### Absolute function
+
+$$f(x) = |x|$$
+
+```{r}
+ggplot(data.frame(x = c(-30,30)), aes(x)) + 
+  stat_function(fun = function(x)abs(x)) +
+  xlab("x") +
+  ylab("f(x)") +
+  geom_hline(yintercept = 0) +
+  geom_vline(xintercept = 0)
+```
+
+
+
+
+Differentiation {.storyboard data-navmenu="Mathematics"}
+==============================================================
+
+
+
+
+Programming {.storyboard}
+================================================================
+
+
+
+
+Probability {.storyboard data-navmenu="Statistics"}
+================================================================
+
+
+
+
+Inference {.storyboard data-navmenu="Statistics"}
+================================================================
+
+
+
+
+
+Regression {.storyboard data-navmenu="Statistics"}
+================================================================
+
+
+
+
+
